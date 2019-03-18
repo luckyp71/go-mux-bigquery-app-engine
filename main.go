@@ -1,18 +1,14 @@
 package main
 
 import (
-	c "go-bigquery/controllers"
-
-	"google.golang.org/appengine"
-
+	r "go-bigquery/routes"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"google.golang.org/appengine"
 )
 
 func main() {
-	router := mux.NewRouter()
-	router.HandleFunc("/questions/{topic}", c.GetPostQuestionsController).Methods("GET")
+	router := r.Routes()
 	http.Handle("/", router)
 	appengine.Main()
 }
