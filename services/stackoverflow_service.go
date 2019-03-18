@@ -9,26 +9,17 @@ import (
 	"google.golang.org/api/iterator"
 )
 
-func GetPostQuestionsService(proj string, topic string) []m.StackOverFlow {
-	ctx := context.Background()
-	var questions []m.StackOverFlow
+func GetPostQuestionsService(projID string, topic string, ctx context.Context) []m.StackOverFlow {
 
-	client, err := cfg.BqCon(proj)
+	var questions []m.StackOverFlow
+	client, err := cfg.BigqueryCon(projID, ctx)
 	if err != nil {
-		log.Fatal(err.Error())
+		log.Println(err.Error())
 	}
 
-	query := client.Query(
-		`SELECT          
-						title,
-                        CONCAT('https://stackoverflow.com/questions/',
-                                CAST(id as STRING)) as url,
-                  
-						view_count
+	query := client.Query(`SELECT title, CONCAT('https://stackoverflow.com/questions/', CAST(id as STRING)) as url, view_count
                 FROM ` + "`bigquery-public-data.stackoverflow.posts_questions`" + `
-                WHERE tags like '%` + topic + `%'
-                ORDER BY view_count DESC
-                LIMIT 10;`)
+                WHERE tags like '%` + topic + `%' ORDER BY view_count DESC LIMIT 10;`)
 
 	rows, err := query.Read(ctx)
 	if err != nil {
