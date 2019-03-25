@@ -10,7 +10,7 @@ func ResponseSuccess(data interface{}) m.Response {
 	return resp
 }
 
-func ResponseError(code int, desc string, debugInfo string) m.Response {
-	resp := m.Response{ResponseCode: code, ResponseDesc: desc, Data: nil, DebugInfo: debugInfo}
+func ResponseNotFound() m.Response {
+	resp := m.Response{ResponseCode: http.StatusNotFound, ResponseDesc: http.StatusText(http.StatusNotFound), Data: nil, DebugInfo: "data not found"}
 	return resp
 }

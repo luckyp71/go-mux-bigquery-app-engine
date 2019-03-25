@@ -3,10 +3,10 @@ package controllers
 import (
 	"encoding/json"
 
-	"google.golang.org/appengine"
-
 	s "go-mux-bigquery-app-engine/services"
 	"net/http"
+
+	"google.golang.org/appengine"
 
 	"github.com/gorilla/mux"
 )
@@ -17,7 +17,13 @@ func GetPostQuestionsController(res http.ResponseWriter, req *http.Request) {
 	projectID := appengine.AppID(ctx)
 	param := mux.Vars(req)
 	questions := s.GetPostQuestionsService(projectID, param["topic"], ctx)
+	var response interface{}
 	res.Header().Set("Content-Type", "application/json")
-	response := s.ResponseSuccess(questions)
-	json.NewEncoder(res).Encode(response)
+	if questions == nil {
+		response = s.ResponseNotFound()
+		json.NewEncoder(res).Encode(response)
+	} else {
+		response = s.ResponseSuccess(questions)
+		json.NewEncoder(res).Encode(response)
+	}
 }
