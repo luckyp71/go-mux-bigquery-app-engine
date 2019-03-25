@@ -1,7 +1,7 @@
 package main
 
 import (
-	r "go-bigquery/routes"
+	r "go-mux-bigquery-app-engine/routes"
 	"net/http"
 
 	"google.golang.org/appengine"
