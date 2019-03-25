@@ -1,7 +1,7 @@
 package routes
 
 import (
-	c "go-bigquery/controllers"
+	c "go-mux-bigquery-app-engine/controllers"
 
 	"github.com/gorilla/mux"
 )

@@ -3,7 +3,7 @@ package services
 import (
 	"context"
 	cfg "go-bigquery/configs"
-	m "go-bigquery/models"
+	m "go-mux-bigquery-app-engine/models"
 	"log"
 
 	"google.golang.org/api/iterator"
