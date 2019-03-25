@@ -2,7 +2,7 @@ package services
 
 import (
 	"context"
-	cfg "go-bigquery/configs"
+	cfg "go-mux-bigquery-app-engine/configs"
 	m "go-mux-bigquery-app-engine/models"
 	"log"
 

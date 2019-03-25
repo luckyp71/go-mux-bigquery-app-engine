@@ -19,8 +19,6 @@ func GetPostQuestionsController(res http.ResponseWriter, req *http.Request) {
 	param := mux.Vars(req)
 	questions := s.GetPostQuestionsService(projectID, param["topic"], ctx)
 	res.Header().Set("Content-Type", "application/json")
-	response := m.Response{ResponseCode: http.ReadResponse().StatusCode,
-		ResponseDesc: http.ReadResponse().Status,
-		Data:         questions}
+	response := m.ResponseSuccess(questions)
 	json.NewEncoder(res).Encode(response)
 }
