@@ -5,7 +5,6 @@ import (
 
 	"google.golang.org/appengine"
 
-	m "go-mux-bigquery-app-engine/models"
 	s "go-mux-bigquery-app-engine/services"
 	"net/http"
 
@@ -19,6 +18,6 @@ func GetPostQuestionsController(res http.ResponseWriter, req *http.Request) {
 	param := mux.Vars(req)
 	questions := s.GetPostQuestionsService(projectID, param["topic"], ctx)
 	res.Header().Set("Content-Type", "application/json")
-	response := m.ResponseSuccess(questions)
+	response := s.ResponseSuccess(questions)
 	json.NewEncoder(res).Encode(response)
 }
